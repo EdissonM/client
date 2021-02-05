@@ -1,4 +1,4 @@
-# client
+# Client
 simulator de dispositivo en python a rabbit
 
 ## Uso.
