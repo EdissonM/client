@@ -2,8 +2,8 @@ FROM python:3.9
 
 RUN pip install pika
 RUN pip install numpy
-RUN apt update && apt install tzdata
-ENV TZ America/Bogota
+RUN pip install pandas
+
 COPY . /app
 WORKDIR /app
-CMD ["python", "client.py"]
+CMD ["python", "mqtt_client.py"]
