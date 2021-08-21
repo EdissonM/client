@@ -9,5 +9,5 @@ docker build -t client .
 
 ### 2. Ejecutar (Correr primero el servidor)
 ```bash
-docker run -it --rm --net=servidor_default client
+docker run -it --rm -e SERVER="ip" client
 ```
