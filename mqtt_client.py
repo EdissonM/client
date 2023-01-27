@@ -12,11 +12,10 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    print(msg.topic + " " + str(msg.payload))
+    print(msg.topic + str(msg.payload))
 
 client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
+client.username_pw_set("guest", password='guest')
 
 client.connect(servidor, 1883, 60)
 client.loop_start()
@@ -24,6 +23,7 @@ client.loop_start()
 df = pd.read_csv ("jena_climate_2009_2016.csv")
 for index, row in df.iterrows():
     time.sleep(1)
-    client.publish("1/temperatura", "{},temperatura,{},{}".format(row["Date Time"], row['T (degC)'], 'T (degC)'))
-    client.publish("1/densidad", "{},densidad,{},{}".format(row["Date Time"], row['rho (g/m**3)'], 'rho (g/m**3)'))
+    actual_time = time.time_ns()
 
+    client.publish("device_1", 'pepe temperatura={} {}'.format(row['T (degC)'], actual_time))
+    client.publish("device_1", 'pepe densidad={} {}'.format(row['rho (g/m**3)'], actual_time))
