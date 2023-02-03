@@ -1,7 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
-import pandas as pd
-import os
+import numpy
 
 servidor = os.environ.get('SERVER')
 
@@ -20,10 +19,8 @@ client.username_pw_set("guest", password='guest')
 client.connect(servidor, 1883, 60)
 client.loop_start()
 
-df = pd.read_csv ("jena_climate_2009_2016.csv")
-for index, row in df.iterrows():
-    time.sleep(1)
-    actual_time = time.time_ns()
-
-    client.publish("device_1", 'pepe temperatura={} {}'.format(row['T (degC)'], actual_time))
-    client.publish("device_1", 'pepe densidad={} {}'.format(row['rho (g/m**3)'], actual_time))
+while True:
+    time.sleep(0.5)
+    rng = numpy.random.default_rng()
+    value = rng.binomial(n=50000, p=0.2, size=1)
+    client.publish("Reloj_inteligente",  'pasos conteo={} '.format(value[0]))
