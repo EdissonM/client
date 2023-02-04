@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import time
 import numpy
+import os
 
 servidor = os.environ.get('SERVER')
 
